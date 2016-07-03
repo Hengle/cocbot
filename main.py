@@ -13,16 +13,18 @@ d.start_app('com.supercell.magic')
 # train an army
 d.click_image('army.2208x1242.png')
 while True:
-    d.click_image(atx.Pattern(r"next.2208x1242.png", offset=(42, 0)))
-    # check if finished.
-    if d.exists('summary.2208x1242.png'):
-        d.click_image('quit.2208x1242.png')
-        break
+    d.click_image(atx.Pattern(r"next.2208x1242.png", offset=(42, 0)), timeout=20)
+    d.delay(0.5)
     # train meizi
     p = d.exists('meizi.2208x1242.png')
     if p:
         for i in range(10):
             d.click(*p.pos)
+        continue
+    # check if finished.
+    if d.exists('editarmy.2208x1242.png'):
+        d.click_image('quit.2208x1242.png')
+        break
 
 print 'wait last operation'
 d.delay(2)
